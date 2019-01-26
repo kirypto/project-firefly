@@ -3,7 +3,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 using Colour = UnityEngine.Color;
 
 public class ConversationOverlayScript : MonoBehaviour
@@ -15,8 +14,8 @@ public class ConversationOverlayScript : MonoBehaviour
     [SerializeField] private int numDialogLines;
     [SerializeField] private List<string> dialogRaw;
     [SerializeField] private bool debugMode;
-    
-    
+
+
     private List<List<string>> _dialogList;
     private List<string> _dialogBox;
     private bool _isFading;
@@ -39,11 +38,13 @@ public class ConversationOverlayScript : MonoBehaviour
         {
             _dialogBox.Add("");
         }
-        
+
         // --------------------------------------------------
         if (debugMode)
         {
+//            InvokeRepeating(nameof(RunNextDialogSequence), 1f, 20f);
             FadeOut();
+            Invoke(nameof(FadeIn), 5f);
         }
     }
 
@@ -82,7 +83,9 @@ public class ConversationOverlayScript : MonoBehaviour
             return;
         }
 
+        _convoCamera.enabled = true;
         _isFading = true;
+        InvokeRepeating(nameof(FadeInLoop), 0f, 0.25f);
     }
 
     private void FadeOutLoop()
@@ -94,7 +97,24 @@ public class ConversationOverlayScript : MonoBehaviour
             newAlpha = 1.0f;
             CancelInvoke(nameof(FadeOutLoop));
             _convoCamera.enabled = false;
+            _isFading = false;
         }
+
+        colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
+        _fadeOutImage.color = colour;
+    }
+
+    private void FadeInLoop()
+    {
+        Colour colour = _fadeOutImage.color;
+        float newAlpha = colour.a - 0.1f;
+        if (newAlpha <= 0.0f)
+        {
+            newAlpha = 0.0f;
+            CancelInvoke(nameof(FadeInLoop));
+            _isFading = false;
+        }
+
         colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
         _fadeOutImage.color = colour;
     }
