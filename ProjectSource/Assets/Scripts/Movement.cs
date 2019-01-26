@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
 
-public class Square_Controls : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     //MOvement
     private float xMove;
