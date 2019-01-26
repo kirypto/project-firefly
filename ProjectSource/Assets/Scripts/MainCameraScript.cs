@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MainCameraScript : MonoBehaviour
 {
+    [SerializeField] private bool debugMode;
+    
     private GameObject _player;
     private Camera _camera;
     private bool _isPlayerNull;
@@ -34,6 +36,11 @@ public class MainCameraScript : MonoBehaviour
     public void FadeIn()
     {
         _camera.enabled = true;
+
+        if (debugMode)
+        {
+            Invoke(nameof(FadeOut), 5f);
+        }
     }
 
     public void FadeOut()
