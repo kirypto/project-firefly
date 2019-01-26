@@ -2,6 +2,9 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
+using Colour = UnityEngine.Color;
 
 public class ConversationOverlayScript : MonoBehaviour
 {
@@ -16,11 +19,14 @@ public class ConversationOverlayScript : MonoBehaviour
     
     private List<List<string>> _dialogList;
     private List<string> _dialogBox;
+    private bool _isFading;
+    private Image _fadeOutImage;
 
     private void Awake()
     {
         _convoTextArea = GameObject.FindWithTag("ConversationTextArea").GetComponent<TextMeshProUGUI>();
         _convoCamera = GameObject.FindWithTag("ConversationCamera").GetComponent<Camera>();
+        _fadeOutImage = GameObject.FindWithTag("ConversationFadeOut").GetComponent<Image>();
 
         _dialogList = new List<List<string>>();
         foreach (string text in dialogRaw)
@@ -37,7 +43,7 @@ public class ConversationOverlayScript : MonoBehaviour
         // --------------------------------------------------
         if (debugMode)
         {
-            InvokeRepeating(nameof(RunNextDialogSequence), 1f, 20f);
+            FadeOut();
         }
     }
 
@@ -48,12 +54,49 @@ public class ConversationOverlayScript : MonoBehaviour
             _convoTextArea.text = "Game Over\nThanks for playing!\n\n\n\n";
             return;
         }
+
         _dialogBox.Clear();
         for (int i = 0; i < numDialogLines; i++)
         {
             _dialogBox.Add("");
         }
+
         InvokeRepeating(nameof(DialogLoop), 1f, 3f);
+    }
+
+    public void FadeOut()
+    {
+        if (_isFading)
+        {
+            return;
+        }
+
+        _isFading = true;
+        InvokeRepeating(nameof(FadeOutLoop), 0f, 0.25f);
+    }
+
+    public void FadeIn()
+    {
+        if (_isFading)
+        {
+            return;
+        }
+
+        _isFading = true;
+    }
+
+    private void FadeOutLoop()
+    {
+        Colour colour = _fadeOutImage.color;
+        float newAlpha = colour.a + 0.1f;
+        if (newAlpha >= 1.0f)
+        {
+            newAlpha = 1.0f;
+            CancelInvoke(nameof(FadeOutLoop));
+            _convoCamera.enabled = false;
+        }
+        colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
+        _fadeOutImage.color = colour;
     }
 
     private void DialogLoop()
@@ -65,6 +108,7 @@ public class ConversationOverlayScript : MonoBehaviour
             _dialogList.RemoveAt(0);
             return;
         }
+
         string message = currentDialog[0];
         currentDialog.RemoveAt(0);
         _dialogBox.RemoveAt(0);
