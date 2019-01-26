@@ -14,7 +14,7 @@ public class MainCameraScript : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player");
         _camera = GetComponent<Camera>();
-        _convoOverlayScript = GameObject.FindWithTag("ConversationOverlay").GetComponent<ConversationOverlayScript>();
+        _convoOverlayScript = GameObject.FindWithTag("ConversationOverlay")?.GetComponent<ConversationOverlayScript>();
 
         if (_player == null)
         {
@@ -30,7 +30,8 @@ public class MainCameraScript : MonoBehaviour
             return;
         }
 
-        transform.position = _player.transform.position;
+        Vector2 playerPos = _player.transform.position;
+        transform.position = new Vector3(playerPos.x, playerPos.y, -10f);
     }
 
     public void FadeIn()
