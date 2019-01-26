@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class firefly_movement : MonoBehaviour
+public class Firefly_movement : MonoBehaviour
 {
 
     private Vector2 startPosition;
     private Vector2 direction;
-    Collider boundingBox;
+    public Collider2D BoundingBox;
+    public float FlySpeed = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
-        boundingBox = (Collider) GetComponentInParent(typeof(Collider));
+        BoundingBox = gameObject.GetComponentInParent(typeof(Collider2D)) as Collider2D;
         startPosition = transform.position;
         direction = Random.insideUnitSphere;
     }
@@ -19,7 +20,10 @@ public class firefly_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!boundingBox.bounds.Contains(transform.position)) {
+        transform.position += (Vector3) direction * FlySpeed;
+        if(!BoundingBox.bounds.Contains(transform.position)) {
+            direction = Random.insideUnitCircle;
+            direction += (startPosition - (Vector2) transform.position).normalized * 0.01f;
             print("Hi I'm not in the box!");
         }
     }
