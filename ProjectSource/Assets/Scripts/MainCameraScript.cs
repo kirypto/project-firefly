@@ -34,6 +34,11 @@ public class MainCameraScript : MonoBehaviour
         transform.position = new Vector3(playerPos.x, playerPos.y, -10f);
     }
 
+    public void MarkFireflyCaught()
+    {
+        
+    }
+
     public void FadeIn()
     {
         _camera.enabled = true;
