@@ -27,13 +27,18 @@ public class ArmMovementScript : MonoBehaviour
         }
 
         SpriteRenderer parent_renderer = transform.parent.GetComponent<SpriteRenderer>();
-        _spriteRenderer.sortingOrder = Direction == FacingDirection.Left
-                ? Mathf.Abs(parent_renderer.sortingOrder - 1)
-                : -1 * Mathf.Abs(parent_renderer.sortingOrder + 1);
-        
        _spriteRenderer.sortingOrder = Direction == FacingDirection.Right
                 ? Mathf.Abs(parent_renderer.sortingOrder + 1)
-                : Mathf.Abs(parent_renderer.sortingOrder - 1); 
+                : Mathf.Abs(parent_renderer.sortingOrder - 1);
+
+       if (Direction == FacingDirection.Right)
+       {
+           _spriteRenderer.flipX = false;
+       }
+       else
+       {
+           _spriteRenderer.flipX = true;
+       }
     }
 
     private void FixedUpdate()
