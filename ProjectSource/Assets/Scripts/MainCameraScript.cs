@@ -9,6 +9,7 @@ public class MainCameraScript : MonoBehaviour
 
     private GameObject _player;
     private Camera _camera;
+    private AudioListener _listener;
     private bool _isPlayerNull;
     private ConversationOverlayScript _convoOverlayScript;
     private TextMeshProUGUI _scoreText;
@@ -18,6 +19,7 @@ public class MainCameraScript : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player");
         _camera = GetComponent<Camera>();
+        _listener = GetComponent<AudioListener>();
         _convoOverlayScript = GameObject.FindWithTag("ConversationOverlay")?.GetComponent<ConversationOverlayScript>();
         _scoreText = transform.Find("Canvas").Find("Score").Find("ScoreValue").GetComponent<TextMeshProUGUI>();
 
@@ -53,6 +55,7 @@ public class MainCameraScript : MonoBehaviour
     public void FadeIn()
     {
         _camera.enabled = true;
+        _listener.enabled = true;
         _fireflyCount = firefliesPerRoom;
         _scoreText.text = _fireflyCount.ToString();
         
@@ -69,6 +72,7 @@ public class MainCameraScript : MonoBehaviour
     public void FadeOut()
     {
         _camera.enabled = false;
+        _listener.enabled = false;
         _convoOverlayScript.FadeIn();
     }
 }

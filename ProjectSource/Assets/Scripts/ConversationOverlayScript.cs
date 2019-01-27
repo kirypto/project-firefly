@@ -10,6 +10,7 @@ public class ConversationOverlayScript : MonoBehaviour
     private TextMeshProUGUI _convoTextArea;
     private Camera _convoCamera;
     private MainCameraScript _mainCameraScript;
+    private AudioListener _convoListener;
 
 
     [SerializeField] private int numDialogLines;
@@ -28,6 +29,7 @@ public class ConversationOverlayScript : MonoBehaviour
         _convoCamera = GameObject.FindWithTag("ConversationCamera").GetComponent<Camera>();
         _fadeOutImage = GameObject.FindWithTag("ConversationFadeOut").GetComponent<Image>();
         _mainCameraScript = GameObject.FindWithTag("MainCamera").GetComponent<MainCameraScript>();
+        _convoListener = GameObject.FindWithTag("ConversationCamera").GetComponent<AudioListener>(); 
 
         _dialogList = new List<List<string>>();
         foreach (string text in dialogRaw)
@@ -86,6 +88,7 @@ public class ConversationOverlayScript : MonoBehaviour
         }
 
         _convoCamera.enabled = true;
+        _convoListener.enabled = true;
         _isFading = true;
         InvokeRepeating(nameof(FadeInLoop), 0f, 0.25f);
     }
@@ -99,6 +102,7 @@ public class ConversationOverlayScript : MonoBehaviour
             newAlpha = 1.0f;
             CancelInvoke(nameof(FadeOutLoop));
             _convoCamera.enabled = false;
+            _convoListener.enabled = false;
             _isFading = false;
             _mainCameraScript.FadeIn();
         }

@@ -285,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4247017121221801944}
   - component: {fileID: 4247017121221801945}
+  - component: {fileID: 9161982497849751219}
   m_Layer: 0
   m_Name: Camera
   m_TagString: ConversationCamera
@@ -348,6 +349,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!81 &9161982497849751219
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247017121221801947}
+  m_Enabled: 1
 --- !u!1 &4247017121222085476
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +478,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18.45
+  m_fontSize: 24.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
