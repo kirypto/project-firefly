@@ -173,13 +173,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8116704277179906044}
-  m_LocalRotation: {x: 0.004906855, y: -0.0015510907, z: -0.96387774, w: -0.26629543}
+  m_LocalRotation: {x: -0, y: 0, z: -0.96592593, w: -0.25881898}
   m_LocalPosition: {x: -0.01, y: 0.206, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6676957276390441531}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -0.321, y: -0.49500003, z: -210.887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -210}
 --- !u!212 &8810770553299438343
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -240,6 +240,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228eaf54142304bb5a39dc182ff7e9a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
+  facingLeftStartAngle: 0
+  facingLeftEndAngle: 0
+  facingRightStartAngle: 0
+  facingRightEndAngle: 0
 --- !u!58 &7864095988414890922
 CircleCollider2D:
   m_ObjectHideFlags: 0
