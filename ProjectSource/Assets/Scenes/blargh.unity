@@ -3640,26 +3640,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6676957276390441529, guid: 4ad84272676474124b64e3ea63a3fbfd,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 7.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6676957276390441529, guid: 4ad84272676474124b64e3ea63a3fbfd,
-        type: 3}
-      propertyPath: m_Mass
-      value: 0.5989585
-      objectReference: {fileID: 0}
-    - target: {fileID: 6319608519152617114, guid: 4ad84272676474124b64e3ea63a3fbfd,
-        type: 3}
-      propertyPath: debugMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6319608519152617114, guid: 4ad84272676474124b64e3ea63a3fbfd,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 25.99
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ad84272676474124b64e3ea63a3fbfd, type: 3}
 --- !u!1001 &951074579
