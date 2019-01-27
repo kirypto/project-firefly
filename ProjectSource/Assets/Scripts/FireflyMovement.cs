@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Firefly_movement : MonoBehaviour
+public class FireflyMovement : MonoBehaviour
 {
 
     private Vector2 startPosition;
