@@ -5,6 +5,7 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private float inertiaOvercomeScalar = 1f;
     [SerializeField] private float inertiaOvercomeThreshold = 1f;
+    [SerializeField] private bool debugMode;
 
     //Movement
     private float _xMove;
@@ -14,23 +15,35 @@ public class Movement : MonoBehaviour
 
     public Rigidbody2D rb;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     private bool _allowJump;
     private ArmMovementScript _armMovementScript;
 
-    // Start is called before the first frame update
+    public bool IsMovementAllowed { get; set; }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         _allowJump = true;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _armMovementScript = GameObject.Find("arm").GetComponent<ArmMovementScript>();
+        IsMovementAllowed = false;
+
+        // -------------------------- DEBUG ----------------------------
+        if (debugMode)
+        {
+            IsMovementAllowed = true;
+        }
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
+        if (!IsMovementAllowed)
+        {
+            return;
+        }
+
         _xMove = Input.GetAxis("Horizontal");
         if (_xMove > 0f || _xMove < 0f)
         {
@@ -40,6 +53,7 @@ public class Movement : MonoBehaviour
             {
                 moveHorizontal *= inertiaOvercomeScalar;
             }
+
             rb.AddForce(moveHorizontal * speed);
         }
 
@@ -54,13 +68,19 @@ public class Movement : MonoBehaviour
 
         if (_xMove > 0.05f)
         {
-            spriteRenderer.flipX = false;
+            _spriteRenderer.flipX = false;
             _armMovementScript.Direction = FacingDirection.Right;
-        } else if (_xMove < -0.05f)
+        }
+        else if (_xMove < -0.05f)
         {
-            spriteRenderer.flipX = true;
+            _spriteRenderer.flipX = true;
             _armMovementScript.Direction = FacingDirection.Left;
         }
+    }
+
+    public void SpawnAtLocation(Vector2 location)
+    {
+        print($"Called {nameof(SpawnAtLocation)} at location {location}, not yet implemented!");
     }
 
     private void ResetJumpCooldown()
