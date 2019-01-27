@@ -9,6 +9,7 @@ TagManager:
   - ConversationOverlay
   - ConversationFadeOut
   - Firefly
+  - SpawnLocation
   layers:
   - Default
   - TransparentFX
