@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4015158396603761318}
   - component: {fileID: 4278580264762018814}
+  - component: {fileID: 1926755229274957192}
   m_Layer: 0
   m_Name: SpawnLocation
   m_TagString: SpawnLocation
@@ -45,3 +46,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnIndex: 0
   numFireflies: 0
+--- !u!114 &1926755229274957192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4015158396603761319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49eba2370e3af148b471ece462339b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 8300000, guid: 25e7bb3f6a827014b9bff55e1cc99b47, type: 3}
+  Volume: 1
+  Pitch: 1
+  Loop: 0
+  SpacialBlend: 0

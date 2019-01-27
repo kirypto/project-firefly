@@ -45,14 +45,14 @@ public class AudioSourceController : MonoBehaviour {
 
     IEnumerator WaitSeconds() {
         while(true) {
-            yield return new WaitForSeconds(Random.Range(5, 15));
+            yield return new WaitForSeconds(Random.Range(15, 60));
             _source.Play();
         }
     }
 
     public void Play() {
         SetSourceProperties(Clip, Volume, Pitch, Loop, SpacialBlend);
-        if(transform.tag == "Firefly") {
+        if(transform.tag == "SpawnLocation") {
             StartCoroutine("WaitSeconds");
             return;
         }
