@@ -3645,6 +3645,11 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 7.01
       objectReference: {fileID: 0}
+    - target: {fileID: 6676957276390441529, guid: 4ad84272676474124b64e3ea63a3fbfd,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.5989585
+      objectReference: {fileID: 0}
     - target: {fileID: 6319608519152617114, guid: 4ad84272676474124b64e3ea63a3fbfd,
         type: 3}
       propertyPath: debugMode
@@ -6600,7 +6605,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 19dcf47015c7eb64ea59411751e77c27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
