@@ -82,6 +82,10 @@ public class MainCameraScript : MonoBehaviour
         SpawnLocationScript currentSpawnLocation = _spawnLocations[0];
         _spawnLocations.RemoveAt(0);
         _playerMovementScript.SpawnAtLocation(currentSpawnLocation.Location);
+        if (null != currentSpawnLocation.Blackness)
+        {
+            Destroy(currentSpawnLocation.Blackness);
+        }
         _fireflyCount = currentSpawnLocation.NumFireflies;
         _scoreText.text = _fireflyCount.ToString();
         _camera.enabled = true;
