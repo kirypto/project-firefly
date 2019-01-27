@@ -26,9 +26,14 @@ public class ArmMovementScript : MonoBehaviour
             SwingArm();
         }
 
+        SpriteRenderer parent_renderer = transform.parent.GetComponent<SpriteRenderer>();
         _spriteRenderer.sortingOrder = Direction == FacingDirection.Left
-                ? Mathf.Abs(_spriteRenderer.sortingOrder)
-                : -1 * Mathf.Abs(_spriteRenderer.sortingOrder);
+                ? Mathf.Abs(parent_renderer.sortingOrder - 1)
+                : -1 * Mathf.Abs(parent_renderer.sortingOrder + 1);
+        
+       _spriteRenderer.sortingOrder = Direction == FacingDirection.Right
+                ? Mathf.Abs(parent_renderer.sortingOrder + 1)
+                : Mathf.Abs(parent_renderer.sortingOrder - 1); 
     }
 
     private void FixedUpdate()
