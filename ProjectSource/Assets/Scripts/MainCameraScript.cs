@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
+using UnityEngine.UI;
+using Colour = UnityEngine.Color;
 
 public class MainCameraScript : MonoBehaviour
 {
@@ -17,6 +20,8 @@ public class MainCameraScript : MonoBehaviour
 
     private List<SpawnLocationScript> _spawnLocations;
     private Movement _playerMovementScript;
+    private Image _fadeOutImage;
+    private bool _isFading;
 
     private void Awake()
     {
@@ -26,6 +31,7 @@ public class MainCameraScript : MonoBehaviour
         _listener = GetComponent<AudioListener>();
         _convoOverlayScript = GameObject.FindWithTag("ConversationOverlay")?.GetComponent<ConversationOverlayScript>();
         _scoreText = transform.Find("Canvas").Find("Score").Find("ScoreValue").GetComponent<TextMeshProUGUI>();
+        _fadeOutImage = transform.Find("Canvas").Find("FadeOutPanel").GetComponent<Image>();
 
         if (_player == null)
         {
@@ -76,18 +82,19 @@ public class MainCameraScript : MonoBehaviour
         SpawnLocationScript currentSpawnLocation = _spawnLocations[0];
         _spawnLocations.RemoveAt(0);
         _playerMovementScript.SpawnAtLocation(currentSpawnLocation.Location);
-        _playerMovementScript.IsMovementAllowed = true;
         _fireflyCount = currentSpawnLocation.NumFireflies;
+        _scoreText.text = _fireflyCount.ToString();
         _camera.enabled = true;
         _listener.enabled = true;
-        _scoreText.text = _fireflyCount.ToString();
+        
+        InvokeRepeating(nameof(FadeInLoop), 0f, 0.25f);
         
         // ---------------------------- DEBUG ---------------------------
         if (debugMode)
         {
             for (int i = 0; i < currentSpawnLocation.NumFireflies; i++)
             {
-                Invoke(nameof(MarkFireflyCaught), i + 1f);
+                Invoke(nameof(MarkFireflyCaught), i + 3f);
             }
         }
     }
@@ -95,8 +102,40 @@ public class MainCameraScript : MonoBehaviour
     public void FadeOut()
     {
         _playerMovementScript.IsMovementAllowed = false;
-        _camera.enabled = false;
-        _listener.enabled = false;
-        _convoOverlayScript.FadeIn();
+        InvokeRepeating(nameof(FadeOutLoop), 0f, 0.25f);
+    }
+
+    private void FadeInLoop()
+    {
+        Colour colour = _fadeOutImage.color;
+        float newAlpha = colour.a - 0.1f;
+        if (newAlpha <= 0.0f)
+        {
+            newAlpha = 0.0f;
+            CancelInvoke(nameof(FadeInLoop));
+            _isFading = false;
+            _playerMovementScript.IsMovementAllowed = true;
+        }
+
+        colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
+        _fadeOutImage.color = colour;
+    }
+
+    private void FadeOutLoop()
+    {
+        Colour colour = _fadeOutImage.color;
+        float newAlpha = colour.a + 0.1f;
+        if (newAlpha >= 1.0f)
+        {
+            newAlpha = 1.0f;
+            CancelInvoke(nameof(FadeOutLoop));
+            _camera.enabled = false;
+            _listener.enabled = false;
+            _convoOverlayScript.FadeIn();
+            _isFading = false;
+        }
+
+        colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
+        _fadeOutImage.color = colour;
     }
 }
