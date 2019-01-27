@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 4247017121221801944}
   - component: {fileID: 4247017121221801945}
   - component: {fileID: 9161982497849751219}
+  - component: {fileID: 6022357476837349866}
   m_Layer: 0
   m_Name: Camera
   m_TagString: ConversationCamera
@@ -592,6 +593,27 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4247017121221801947}
   m_Enabled: 1
+--- !u!114 &6022357476837349866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4247017121221801947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49eba2370e3af148b471ece462339b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 8300000, guid: 383a5b74698e13b4c803bfc5bf6b647a, type: 3}
+  Volume: 1
+  Pitch: 1
+  Loop: 0
+  SpacialBlend: 1
+  RandomNames:
+  - GrannySound
+  RandomTags:
+  - SpawnLocation
 --- !u!1 &4247017121222085476
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +735,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 18.45
+  m_fontSize: 16.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -759,7 +781,7 @@ MonoBehaviour:
     spaceCount: 32
     wordCount: 31
     linkCount: 0
-    lineCount: 15
+    lineCount: 17
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

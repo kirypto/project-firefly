@@ -7530,7 +7530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Clip: {fileID: 8300000, guid: 5390fed8df6f1784a91bae87dc66e790, type: 3}
-  Volume: 1
+  Volume: 0.12
   Pitch: 1
   Loop: 0
   SpacialBlend: 0

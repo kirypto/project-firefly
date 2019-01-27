@@ -11,6 +11,7 @@ public class ConversationOverlayScript : MonoBehaviour
     private Camera _convoCamera;
     private MainCameraScript _mainCameraScript;
     private AudioListener _convoListener;
+    private AudioSourceController _convoSource;
 
 
     [SerializeField] private int numDialogLines;
@@ -29,6 +30,7 @@ public class ConversationOverlayScript : MonoBehaviour
         _fadeOutImage = GameObject.FindWithTag("ConversationFadeOut").GetComponent<Image>();
         _mainCameraScript = GameObject.FindWithTag("MainCamera").GetComponent<MainCameraScript>();
         _convoListener = GameObject.FindWithTag("ConversationCamera").GetComponent<AudioListener>();
+        _convoSource = GameObject.FindWithTag("ConversationCamera").GetComponent<AudioSourceController>();
 
         _dialogList = new List<List<string>>();
         foreach (string text in dialogRaw)
@@ -69,7 +71,7 @@ public class ConversationOverlayScript : MonoBehaviour
 
         ClearDialogBox();
 
-        InvokeRepeating(nameof(DialogLoop), 1f, 1.5f);
+        InvokeRepeating(nameof(DialogLoop), 3f, 1.5f);
     }
 
     private void ClearDialogBox()
@@ -157,6 +159,11 @@ public class ConversationOverlayScript : MonoBehaviour
         _dialogBox.RemoveAt(0);
         _dialogBox.Add(message);
         UpdateDialogBox();
+        if(message.Contains("Granny")) {
+            _convoSource.Play("Granny");
+        } else if (message.Contains("Theo")) {
+            _convoSource.Play("Theo");
+        }
     }
 
     private void UpdateDialogBox()
