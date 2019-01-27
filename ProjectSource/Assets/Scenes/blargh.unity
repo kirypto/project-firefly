@@ -2175,6 +2175,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 278184401}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &479273173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479273174}
+  - component: {fileID: 479273175}
+  m_Layer: 0
+  m_Name: GrannySound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479273174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479273173}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.04, y: -6.98, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1378598145}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &479273175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479273173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49eba2370e3af148b471ece462339b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 8300000, guid: fc03881232036874aad6c83190f4b0e2, type: 3}
+  Volume: 1
+  Pitch: 1
+  Loop: 0
+  SpacialBlend: 0
 --- !u!4 &507770847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1635407674811554201, guid: 497c90207c0ead6428b5a3b4f0b79917,
@@ -5185,6 +5233,7 @@ Transform:
   - {fileID: 1785802915}
   - {fileID: 343788912}
   - {fileID: 91446574}
+  - {fileID: 479273174}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
