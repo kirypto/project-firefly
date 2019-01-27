@@ -10,8 +10,6 @@ public class ArmMovementScript : MonoBehaviour
 
     private bool _isSwingingForward;
     private float _timeStartedLerping;
-    private Quaternion _startRotation;
-    private Quaternion _endRotation;
     private bool _isSwingingReturn;
     private bool _isFacingLeft = true;
 
@@ -55,8 +53,7 @@ public class ArmMovementScript : MonoBehaviour
             _isSwingingReturn = true;
             _timeStartedLerping = Time.time;
 
-            _startRotation = transform.rotation;
-            _endRotation = Quaternion.AngleAxis(-205f, transform.forward);
+            Quaternion.AngleAxis(-205f, transform.forward);
         }
     }
 
@@ -83,8 +80,7 @@ public class ArmMovementScript : MonoBehaviour
         _isSwingingForward = true;
         _timeStartedLerping = Time.time;
 
-        _startRotation = transform.rotation;
-        _endRotation = Quaternion.AngleAxis(-90f, transform.forward);
+        Quaternion.AngleAxis(-90f, transform.forward);
     }
 
     private static float CalculateLerpVal(float x)
