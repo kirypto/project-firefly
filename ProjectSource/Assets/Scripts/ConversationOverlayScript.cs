@@ -41,6 +41,8 @@ public class ConversationOverlayScript : MonoBehaviour
         {
             _dialogBox.Add("");
         }
+        
+        ClearDialogBox();
     }
 
     private void Start()
@@ -56,13 +58,19 @@ public class ConversationOverlayScript : MonoBehaviour
             return;
         }
 
+        ClearDialogBox();
+
+        InvokeRepeating(nameof(DialogLoop), 1f, 2f);
+    }
+
+    private void ClearDialogBox()
+    {
         _dialogBox.Clear();
         for (int i = 0; i < numDialogLines; i++)
         {
             _dialogBox.Add("");
         }
-
-        InvokeRepeating(nameof(DialogLoop), 1f, 2f);
+        UpdateDialogBox();
     }
 
     public void FadeOut()
@@ -83,6 +91,7 @@ public class ConversationOverlayScript : MonoBehaviour
             return;
         }
 
+        ClearDialogBox();
         _convoCamera.enabled = true;
         _convoListener.enabled = true;
         _isFading = true;
