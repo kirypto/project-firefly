@@ -15,7 +15,6 @@ public class ConversationOverlayScript : MonoBehaviour
 
     [SerializeField] private int numDialogLines;
     [SerializeField] private List<string> dialogRaw;
-    [SerializeField] private bool debugMode;
 
 
     private List<List<string>> _dialogList;
@@ -42,14 +41,11 @@ public class ConversationOverlayScript : MonoBehaviour
         {
             _dialogBox.Add("");
         }
+    }
 
-        // --------------------------- DEBUG -----------------------
-        if (debugMode)
-        {
-//            InvokeRepeating(nameof(RunNextDialogSequence), 1f, 20f);
-            FadeOut();
-//            Invoke(nameof(FadeIn), 5f);
-        }
+    private void Start()
+    {
+        Invoke(nameof(RunNextDialogSequence), 2f);
     }
 
     public void RunNextDialogSequence()
@@ -66,7 +62,7 @@ public class ConversationOverlayScript : MonoBehaviour
             _dialogBox.Add("");
         }
 
-        InvokeRepeating(nameof(DialogLoop), 1f, 3f);
+        InvokeRepeating(nameof(DialogLoop), 1f, 2f);
     }
 
     public void FadeOut()
@@ -120,11 +116,7 @@ public class ConversationOverlayScript : MonoBehaviour
             newAlpha = 0.0f;
             CancelInvoke(nameof(FadeInLoop));
             _isFading = false;
-            // --------------------------- DEBUG -----------------------
-            if (debugMode)
-            {
-                Invoke(nameof(FadeOut), 2f);
-            }
+            RunNextDialogSequence();
         }
 
         colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
@@ -138,6 +130,7 @@ public class ConversationOverlayScript : MonoBehaviour
         {
             CancelInvoke(nameof(DialogLoop));
             _dialogList.RemoveAt(0);
+            Invoke(nameof(FadeOut), 1f);
             return;
         }
 
