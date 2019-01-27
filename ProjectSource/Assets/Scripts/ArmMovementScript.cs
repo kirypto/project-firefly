@@ -110,7 +110,6 @@ public class ArmMovementScript : MonoBehaviour
             return;
         }
 
-        Debug.Log("CAUGHT SOMETHING");
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCameraScript>().MarkFireflyCaught();
         Destroy(other.gameObject);
     }

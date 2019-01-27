@@ -24,7 +24,6 @@ public class Firefly_movement : MonoBehaviour
         if(!BoundingBox.bounds.Contains(transform.position)) {
             direction = Random.insideUnitCircle;
             direction += (startPosition - (Vector2) transform.position).normalized * 0.25f;
-            //print("Hi I'm not in the box!");
         }
     }
 }

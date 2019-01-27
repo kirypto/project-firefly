@@ -60,7 +60,6 @@ public class Movement : MonoBehaviour
         if (_jMove > 0 && IsGrounded() && rb.velocity.y == 0)
         {
             Vector2 moveJump = new Vector2(0.0f, _jMove);
-            print("Jumping");
             rb.AddForce((moveJump * jumpHeight), ForceMode2D.Impulse);
         }
 
