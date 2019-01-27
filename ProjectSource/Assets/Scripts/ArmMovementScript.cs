@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ArmMovementScript : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ArmMovementScript : MonoBehaviour
     private bool _isSwingingForward;
     private float _timeStartedLerping;
     private bool _isSwingingReturn;
-    private bool _isFacingLeft = true;
+    public FacingDirection Direction { get; set; } = FacingDirection.Left;
 
     private void Update()
     {
@@ -21,7 +22,7 @@ public class ArmMovementScript : MonoBehaviour
         }
 
         // ------------------------- DEBUG ----------------------
-        _isFacingLeft = !debugMode;
+        Direction = debugMode ? FacingDirection.Right : FacingDirection.Left;
     }
 
     private void FixedUpdate()
@@ -69,8 +70,8 @@ public class ArmMovementScript : MonoBehaviour
         }
     }
 
-    private float SwingStartAngle => _isFacingLeft ? facingLeftStartAngle : facingRightStartAngle;
-    private float SwingEndAngle => _isFacingLeft ? facingLeftEndAngle : facingRightEndAngle;
+    private float SwingStartAngle => Direction == FacingDirection.Left ? facingLeftStartAngle : facingRightStartAngle;
+    private float SwingEndAngle => Direction == FacingDirection.Left ? facingLeftEndAngle : facingRightEndAngle;
 
     private Quaternion SwingStartRotation => Quaternion.AngleAxis(SwingStartAngle, Vector3.forward);
     private Quaternion SwingEndRotation => Quaternion.AngleAxis(SwingEndAngle, Vector3.forward);
