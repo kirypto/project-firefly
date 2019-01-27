@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
@@ -80,7 +79,10 @@ public class Movement : MonoBehaviour
 
     public void SpawnAtLocation(Vector2 location)
     {
-        print($"Called {nameof(SpawnAtLocation)} at location {location}, not yet implemented!");
+        transform.position = location;
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        rb.Sleep();
     }
 
     private void ResetJumpCooldown()

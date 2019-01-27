@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MainCameraScript : MonoBehaviour
 {
+    [SerializeField] private bool debugMode;
+    
     private GameObject _player;
     private Camera _camera;
     private AudioListener _listener;
@@ -79,6 +81,15 @@ public class MainCameraScript : MonoBehaviour
         _camera.enabled = true;
         _listener.enabled = true;
         _scoreText.text = _fireflyCount.ToString();
+        
+        // ---------------------------- DEBUG ---------------------------
+        if (debugMode)
+        {
+            for (int i = 0; i < currentSpawnLocation.NumFireflies; i++)
+            {
+                Invoke(nameof(MarkFireflyCaught), i + 1f);
+            }
+        }
     }
 
     public void FadeOut()

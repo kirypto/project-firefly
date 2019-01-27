@@ -29,7 +29,7 @@ public class ConversationOverlayScript : MonoBehaviour
         _convoCamera = GameObject.FindWithTag("ConversationCamera").GetComponent<Camera>();
         _fadeOutImage = GameObject.FindWithTag("ConversationFadeOut").GetComponent<Image>();
         _mainCameraScript = GameObject.FindWithTag("MainCamera").GetComponent<MainCameraScript>();
-        _convoListener = GameObject.FindWithTag("ConversationCamera").GetComponent<AudioListener>(); 
+        _convoListener = GameObject.FindWithTag("ConversationCamera").GetComponent<AudioListener>();
 
         _dialogList = new List<List<string>>();
         foreach (string text in dialogRaw)
@@ -43,7 +43,7 @@ public class ConversationOverlayScript : MonoBehaviour
             _dialogBox.Add("");
         }
 
-        // --------------------------------------------------
+        // --------------------------- DEBUG -----------------------
         if (debugMode)
         {
 //            InvokeRepeating(nameof(RunNextDialogSequence), 1f, 20f);
@@ -120,6 +120,11 @@ public class ConversationOverlayScript : MonoBehaviour
             newAlpha = 0.0f;
             CancelInvoke(nameof(FadeInLoop));
             _isFading = false;
+            // --------------------------- DEBUG -----------------------
+            if (debugMode)
+            {
+                Invoke(nameof(FadeOut), 2f);
+            }
         }
 
         colour = new Colour(colour.r, colour.g, colour.b, newAlpha);
