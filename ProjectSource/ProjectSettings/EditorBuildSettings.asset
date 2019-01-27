@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/blargh.unity
+    guid: 473e9877cb4925c49a420b81a4b30999
   m_configObjects: {}
