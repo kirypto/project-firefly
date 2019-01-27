@@ -121,11 +121,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numDialogLines: 15
   dialogRaw:
-  - 'Garrett: Hello Granny.|Granny: Hello Garrett.|Garrett: ...|Granny: You know this
-    is just a test, right?|Garrett: ...'
-  - 'Garrett: Next test|There are words now.|And new words'
-  - These are the last words.|No these are|Okay, these are actually..
-  debugMode: 0
+  - 'Theo: Hello Granny!|Granny: Hello Theo.|Theo: Why do you look sad?|Granny: Well,
+    my dear theo, I wish to read, but it''s a little too dark in here for my old eyes.|Theo:
+    I can turn the light on for you!|Granny: Oh Theo, you are sweet, but you know
+    we have no power...|Theo: ...|Theo: I have an idea!|Granny: Oh?|Theo: Fireflies!
+    If I catch some, you can read with their light!'
+  - 'Granny: Thank you Theo, that was very kind of you.|Theo: You are welcome, Granny!|Granny:
+    Now if only I could have a cup of tea.|Theo: I can make you some!|Granny: But
+    there is no light in the kitchen.|Theo: Don''t worry, I''ve got this.'
+  - 'Granny: Again, Theo, I must thank you.|Theo: No worries, Granny.|Granny: But
+    soon it shall be time for bed.|Theo: Okay...|Granny: But before bed, do you think
+    you catch enough to light up my room as well?|Theo: Of Course!'
+  - 'Granny: And now, I have one final request, Theo.|Theo: Yes Granny?|Granny: Catch
+    a few more, and we can light up your room too. Then it will be time for bed.|Theo:
+    Okay, will do.'
 --- !u!1 &4247017119835549481
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,10 +473,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0, g: 1, b: 0.17089105, a: 1}
-    topRight: {r: 0, g: 1, b: 0.17089105, a: 1}
-    bottomLeft: {r: 0, g: 0.33834887, b: 1, a: 1}
-    bottomRight: {r: 0, g: 0.33834887, b: 1, a: 1}
+    topLeft: {r: 0.78823537, g: 0.50980395, b: 0.37254903, a: 1}
+    topRight: {r: 0.78823537, g: 0.50980395, b: 0.37254903, a: 1}
+    bottomLeft: {r: 0.83921576, g: 0.5411765, b: 0.2901961, a: 1}
+    bottomRight: {r: 0.83921576, g: 0.5411765, b: 0.2901961, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0

@@ -54,13 +54,22 @@ public class ConversationOverlayScript : MonoBehaviour
     {
         if (_dialogList.Count == 0)
         {
-            _convoTextArea.text = "Game Over\nThanks for playing!\n\n\n\n";
+            _convoTextArea.text = "\n\n" +
+                                  "Game Over\n" +
+                                  "Thanks for playing!\n\n" +
+                                  "Authors:\n" +
+                                  " - Jessica Berry\n" +
+                                  " - Garrett Hansen\n" +
+                                  " - Bennett Lewis\n" +
+                                  " - Robin Lowe\n" +
+                                  " - Killian Stacey\n" +
+                                  "";
             return;
         }
 
         ClearDialogBox();
 
-        InvokeRepeating(nameof(DialogLoop), 1f, 2f);
+        InvokeRepeating(nameof(DialogLoop), 1f, 1.5f);
     }
 
     private void ClearDialogBox()
