@@ -11,12 +11,12 @@ public class Movement : MonoBehaviour
     private float _jMove;
     public float speed = 75f;
     public float jumpHeight = 20f;
+    private float distToGround;
 
     public Rigidbody2D rb;
 
     private SpriteRenderer _spriteRenderer;
 
-    private bool _allowJump;
     private ArmMovementScript _armMovementScript;
 
     public bool IsMovementAllowed { get; set; }
@@ -24,10 +24,10 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        _allowJump = true;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _armMovementScript = GameObject.Find("arm").GetComponent<ArmMovementScript>();
         IsMovementAllowed = false;
+        distToGround = GetComponent<Collider2D>().bounds.extents.y;
 
         // -------------------------- DEBUG ----------------------------
         if (debugMode)
@@ -57,11 +57,10 @@ public class Movement : MonoBehaviour
         }
 
         _jMove = Input.GetAxis("Jump");
-        if (_jMove > 0 && _allowJump)
+        if (_jMove > 0 && IsGrounded() && rb.velocity.y == 0)
         {
-            _allowJump = false;
-            Invoke(nameof(ResetJumpCooldown), 1.5f);
             Vector2 moveJump = new Vector2(0.0f, _jMove);
+            print("Jumping");
             rb.AddForce((moveJump * jumpHeight), ForceMode2D.Impulse);
         }
 
@@ -77,16 +76,15 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void SpawnAtLocation(Vector2 location)
-    {
-        transform.position = location;
-        rb.velocity = Vector2.zero;
-        rb.angularVelocity = 0f;
-        rb.Sleep();
+    public  bool IsGrounded() {
+        return Physics2D.Raycast(transform.position, -Vector2.up, distToGround + 0.1f, LayerMask.GetMask("Background"));
     }
 
-    private void ResetJumpCooldown()
-    {
-        _allowJump = true;
-    }
+    public void SpawnAtLocation(Vector2 location)
+        {
+            transform.position = location;
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.Sleep();
+        }
 }
