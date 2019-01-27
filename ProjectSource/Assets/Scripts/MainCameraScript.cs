@@ -1,20 +1,25 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class MainCameraScript : MonoBehaviour
 {
+    [SerializeField] private int firefliesPerRoom = 1;
     [SerializeField] private bool debugMode;
-    
+
     private GameObject _player;
     private Camera _camera;
     private bool _isPlayerNull;
     private ConversationOverlayScript _convoOverlayScript;
+    private TextMeshProUGUI _scoreText;
+    private int _fireflyCount;
 
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player");
         _camera = GetComponent<Camera>();
         _convoOverlayScript = GameObject.FindWithTag("ConversationOverlay")?.GetComponent<ConversationOverlayScript>();
+        _scoreText = transform.Find("Canvas").Find("Score").Find("ScoreValue").GetComponent<TextMeshProUGUI>();
 
         if (_player == null)
         {
@@ -36,16 +41,28 @@ public class MainCameraScript : MonoBehaviour
 
     public void MarkFireflyCaught()
     {
-        print($"Function '{nameof(MarkFireflyCaught)}': Not yet implemented!");
+        _fireflyCount = Mathf.Max(0, _fireflyCount - 1);
+        _scoreText.text = _fireflyCount.ToString();
+
+        if (_fireflyCount == 0)
+        {
+            FadeOut();
+        }
     }
 
     public void FadeIn()
     {
         _camera.enabled = true;
-
+        _fireflyCount = firefliesPerRoom;
+        _scoreText.text = _fireflyCount.ToString();
+        
+        // -------------------------- DEBUG --------------------------------
         if (debugMode)
         {
-            Invoke(nameof(FadeOut), 5f);
+            for (int i = 0; i < firefliesPerRoom; i++)
+            {
+                Invoke(nameof(MarkFireflyCaught), i);
+            }
         }
     }
 
