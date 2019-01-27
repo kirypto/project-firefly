@@ -21,6 +21,10 @@ public class AudioSourceController : MonoBehaviour {
     [Range(0f, 1f)]
     public float SpacialBlend = 1f;
 
+    public string[] RandomNames = { "GrannySound" };
+
+    public string[] RandomTags = { "SpawnLocation" };
+
 
     void Awake() {
         _source = GetComponent<AudioSource>();
@@ -52,7 +56,11 @@ public class AudioSourceController : MonoBehaviour {
 
     public void Play() {
         SetSourceProperties(Clip, Volume, Pitch, Loop, SpacialBlend);
-        if(transform.tag == "SpawnLocation") {
+        if(System.Array.IndexOf(RandomTags, transform.tag) != -1) {
+            StartCoroutine("WaitSeconds");
+            return;
+        }
+        if (System.Array.IndexOf(RandomNames, transform.name) != -1) {
             StartCoroutine("WaitSeconds");
             return;
         }
