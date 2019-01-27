@@ -3,7 +3,6 @@ using UnityEngine.Serialization;
 
 public class ArmMovementScript : MonoBehaviour
 {
-    [SerializeField] private bool debugMode;
     [SerializeField] private float facingLeftStartAngle;
     [SerializeField] private float facingLeftEndAngle;
     [SerializeField] private float facingRightStartAngle;
@@ -12,7 +11,13 @@ public class ArmMovementScript : MonoBehaviour
     private bool _isSwingingForward;
     private float _timeStartedLerping;
     private bool _isSwingingReturn;
+    private SpriteRenderer _spriteRenderer;
     public FacingDirection Direction { get; set; } = FacingDirection.Left;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Update()
     {
@@ -21,8 +26,9 @@ public class ArmMovementScript : MonoBehaviour
             SwingArm();
         }
 
-        // ------------------------- DEBUG ----------------------
-        Direction = debugMode ? FacingDirection.Right : FacingDirection.Left;
+        _spriteRenderer.sortingOrder = Direction == FacingDirection.Left
+                ? Mathf.Abs(_spriteRenderer.sortingOrder)
+                : -1 * Mathf.Abs(_spriteRenderer.sortingOrder);
     }
 
     private void FixedUpdate()

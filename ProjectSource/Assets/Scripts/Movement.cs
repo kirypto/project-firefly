@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private bool _allowJump;
+    private ArmMovementScript _armMovementScript;
 
     // Start is called before the first frame update
     private void Awake()
@@ -24,6 +25,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         _allowJump = true;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _armMovementScript = GameObject.Find("arm").GetComponent<ArmMovementScript>();
     }
 
     // Update is called once per frame
@@ -49,9 +51,15 @@ public class Movement : MonoBehaviour
             Vector2 moveJump = new Vector2(0.0f, _jMove);
             rb.AddForce((moveJump * jumpHeight), ForceMode2D.Impulse);
         }
-        bool flipSprite = (spriteRenderer.flipX ? (_xMove > 0.01f) : (_xMove < 0.01f));
-        if (flipSprite) {
-            spriteRenderer.flipX = !spriteRenderer.flipX;
+
+        if (_xMove > 0.05f)
+        {
+            spriteRenderer.flipX = false;
+            _armMovementScript.Direction = FacingDirection.Right;
+        } else if (_xMove < -0.05f)
+        {
+            spriteRenderer.flipX = true;
+            _armMovementScript.Direction = FacingDirection.Left;
         }
     }
 
