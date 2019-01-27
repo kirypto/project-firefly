@@ -91,6 +91,7 @@ public class ArmMovementScript : MonoBehaviour
     {
         _isSwingingForward = true;
         _timeStartedLerping = Time.time;
+        transform.parent.GetComponent<AudioSourceController>().Play();
 
         Quaternion.AngleAxis(-90f, transform.forward);
     }
