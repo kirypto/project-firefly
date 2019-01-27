@@ -42,4 +42,14 @@ public class arm_Movement : MonoBehaviour
         
         allowSwing = true;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("CAUGHT SOMETHING");
+        if (other.tag.Equals("Firefly"))
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCameraScript>().MarkFireflyCaught();
+            Destroy(other.gameObject);
+        }
+    }
 }
