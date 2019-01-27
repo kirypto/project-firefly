@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _armMovementScript = GameObject.Find("arm").GetComponent<ArmMovementScript>();
+        _armMovementScript = transform.Find("arm").GetComponent<ArmMovementScript>();
         IsMovementAllowed = false;
         distToGround = GetComponent<Collider2D>().bounds.extents.y;
 
