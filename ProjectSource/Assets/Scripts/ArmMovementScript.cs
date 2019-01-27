@@ -2,15 +2,15 @@
 
 public class ArmMovementScript : MonoBehaviour
 {
-    private bool _isLerpingForward;
+    private bool _isSwingingForward;
     private float _timeStartedLerping;
     private Quaternion _startRotation;
     private Quaternion _endRotation;
-    private bool _isLerpingBackward;
+    private bool _isSwingingReturn;
 
     private void Update()
     {
-        if (0 < Input.GetAxis("Fire3") && !_isLerpingForward && !_isLerpingBackward)
+        if (0 < Input.GetAxis("Fire3") && !_isSwingingForward && !_isSwingingReturn)
         {
             SwingArm();
         }
@@ -18,38 +18,49 @@ public class ArmMovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_isLerpingForward)
+        if(_isSwingingForward)
         {
-            float timeSinceStarted = Time.time - _timeStartedLerping;
-            float percentageComplete = timeSinceStarted / 1f;
- 
-            transform.rotation = Quaternion.Lerp(_startRotation, _endRotation, CalculateLerpVal(percentageComplete));
- 
-            if(percentageComplete >= 1.0f)
-            {
-                _isLerpingForward = false;
-                _isLerpingBackward = true;
-                _timeStartedLerping = Time.time;
- 
-                _startRotation = transform.rotation;
-                _endRotation = Quaternion.AngleAxis(-205f, Vector3.forward);
-            }
-        } else if (_isLerpingBackward)
+            HandleForwardSwing();
+        } else if (_isSwingingReturn)
         {
-            float timeSinceStarted = Time.time - _timeStartedLerping;
-            float percentageComplete = timeSinceStarted / 1f;
- 
-            transform.rotation = Quaternion.Lerp(_startRotation, _endRotation, percentageComplete);
-            if (percentageComplete >= 1.0f)
-            {
-                _isLerpingBackward = false;
-            }
+            HandleReturnSwing();
         }
     }
 
+    private void HandleReturnSwing()
+    {
+        float timeSinceStarted = Time.time - _timeStartedLerping;
+        float percentageComplete = timeSinceStarted / 1f;
+
+        transform.rotation = Quaternion.Lerp(_startRotation, _endRotation, percentageComplete);
+        if (percentageComplete >= 1.0f)
+        {
+            _isSwingingReturn = false;
+        }
+    }
+
+    private void HandleForwardSwing()
+    {
+        float timeSinceStarted = Time.time - _timeStartedLerping;
+        float percentageComplete = timeSinceStarted / 1f;
+
+        transform.rotation = Quaternion.Lerp(_startRotation, _endRotation, CalculateLerpVal(percentageComplete));
+
+        if (percentageComplete >= 1.0f)
+        {
+            _isSwingingForward = false;
+            _isSwingingReturn = true;
+            _timeStartedLerping = Time.time;
+
+            _startRotation = transform.rotation;
+            _endRotation = Quaternion.AngleAxis(-205f, Vector3.forward);
+        }
+    }
+
+
     private void SwingArm()
     {
-        _isLerpingForward = true;
+        _isSwingingForward = true;
         _timeStartedLerping = Time.time;
  
         _startRotation = transform.rotation;
