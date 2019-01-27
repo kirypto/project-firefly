@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class arm_Movement : MonoBehaviour
+public class ArmMovementScript : MonoBehaviour
 {
     private float armMove;
     private bool allowSwing;
