@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class MainCameraScript : MonoBehaviour
     private TextMeshProUGUI _scoreText;
     private int _fireflyCount;
 
+    private List<SpawnLocationScript> _spawnLocations;
+
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player");
@@ -26,7 +29,17 @@ public class MainCameraScript : MonoBehaviour
         if (_player == null)
         {
             _isPlayerNull = true;
-            throw new ArgumentNullException($"The player object is not in the scene.");
+            Debug.LogError("No Player object found in the scene!");
+        }
+
+        _spawnLocations = GameObject.FindGameObjectsWithTag("SpawnLocation")
+                .Select(spawnLocationObject => spawnLocationObject.GetComponent<SpawnLocationScript>())
+                .ToList();
+        _spawnLocations.Sort((spawnLocation1, spawnLocation2) => spawnLocation1.SpawnIndex.CompareTo(spawnLocation2.SpawnIndex));
+
+        if (_spawnLocations.Count == 0)
+        {
+            Debug.LogError("No SpawnLocation objects were found in the scene!");
         }
     }
 
@@ -58,7 +71,7 @@ public class MainCameraScript : MonoBehaviour
         _listener.enabled = true;
         _fireflyCount = firefliesPerRoom;
         _scoreText.text = _fireflyCount.ToString();
-        
+
         // -------------------------- DEBUG --------------------------------
         if (debugMode)
         {
