@@ -36,7 +36,7 @@ public class MainCameraScript : MonoBehaviour
 
     public void MarkFireflyCaught()
     {
-        
+        print($"Function '{nameof(MarkFireflyCaught)}': Not yet implemented!");
     }
 
     public void FadeIn()
