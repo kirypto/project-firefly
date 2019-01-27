@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ArmMovementScript : MonoBehaviour
 {
@@ -18,7 +16,7 @@ public class ArmMovementScript : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if(_isLerpingForward)
         {
