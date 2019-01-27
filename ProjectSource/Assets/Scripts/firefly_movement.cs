@@ -12,7 +12,7 @@ public class Firefly_movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BoundingBox = gameObject.GetComponentInParent(typeof(Collider2D)) as Collider2D;
+        BoundingBox = gameObject.GetComponentInParent(typeof(BoxCollider2D)) as Collider2D;
         startPosition = transform.position;
         direction = Random.insideUnitSphere;
     }
@@ -23,8 +23,8 @@ public class Firefly_movement : MonoBehaviour
         transform.position += (Vector3) direction * FlySpeed;
         if(!BoundingBox.bounds.Contains(transform.position)) {
             direction = Random.insideUnitCircle;
-            direction += (startPosition - (Vector2) transform.position).normalized * 0.01f;
-            print("Hi I'm not in the box!");
+            direction += (startPosition - (Vector2) transform.position).normalized * 0.25f;
+            //print("Hi I'm not in the box!");
         }
     }
 }

@@ -43,11 +43,11 @@ public class arm_Movement : MonoBehaviour
         allowSwing = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("CAUGHT SOMETHING");
         if (other.tag.Equals("Firefly"))
         {
+            Debug.Log("CAUGHT SOMETHING");
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCameraScript>().MarkFireflyCaught();
             Destroy(other.gameObject);
         }
