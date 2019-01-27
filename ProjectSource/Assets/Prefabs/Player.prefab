@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inertiaOvercomeScalar: 3
   inertiaOvercomeThreshold: 5
-  debugMode: 1
+  debugMode: 0
   speed: 75
   jumpHeight: 20
   rb: {fileID: 0}
