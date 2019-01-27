@@ -56,14 +56,10 @@ public class AudioSourceController : MonoBehaviour {
 
     public void Play(string Name) {
         if (Name == "Granny") {
-            print("Granny sound");
             Clip = (AudioClip)Resources.Load("g3");
         } else if (Name == "Theo") {
-            print("Theo sound");
             Clip = (AudioClip)Resources.Load("kidtalking4");
         }
-        print(Clip);
-
         Play();
     }
 
