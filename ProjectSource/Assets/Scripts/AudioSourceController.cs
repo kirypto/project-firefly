@@ -45,9 +45,8 @@ public class AudioSourceController : MonoBehaviour {
 
     IEnumerator WaitSeconds() {
         while(true) {
-            _source.Play();
             yield return new WaitForSeconds(Random.Range(5, 15));
-
+            _source.Play();
         }
     }
 
