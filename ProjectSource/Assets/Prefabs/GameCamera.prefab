@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firefliesPerRoom: 5
-  debugMode: 1
+  debugMode: 0
 --- !u!1 &6127692896884961577
 GameObject:
   m_ObjectHideFlags: 0

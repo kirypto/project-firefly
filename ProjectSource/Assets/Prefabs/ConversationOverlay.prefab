@@ -125,7 +125,7 @@ MonoBehaviour:
     is just a test, right?|Garrett: ...'
   - 'Garrett: Next test|There are words now.|And new words'
   - These are the last words.|No these are|Okay, these are actually..
-  debugMode: 1
+  debugMode: 0
 --- !u!1 &4247017119835549481
 GameObject:
   m_ObjectHideFlags: 0
