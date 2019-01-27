@@ -241,10 +241,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 0
-  facingLeftStartAngle: 0
-  facingLeftEndAngle: 0
-  facingRightStartAngle: 0
-  facingRightEndAngle: 0
+  facingLeftStartAngle: -210
+  facingLeftEndAngle: -90
+  facingRightStartAngle: 210
+  facingRightEndAngle: 90
 --- !u!58 &7864095988414890922
 CircleCollider2D:
   m_ObjectHideFlags: 0

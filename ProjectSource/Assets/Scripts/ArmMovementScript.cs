@@ -2,11 +2,18 @@
 
 public class ArmMovementScript : MonoBehaviour
 {
+    [SerializeField] private bool debugMode;
+    [SerializeField] private float facingLeftStartAngle;
+    [SerializeField] private float facingLeftEndAngle;
+    [SerializeField] private float facingRightStartAngle;
+    [SerializeField] private float facingRightEndAngle;
+
     private bool _isSwingingForward;
     private float _timeStartedLerping;
     private Quaternion _startRotation;
     private Quaternion _endRotation;
     private bool _isSwingingReturn;
+    private bool _isFacingLeft = true;
 
     private void Update()
     {
@@ -14,28 +21,24 @@ public class ArmMovementScript : MonoBehaviour
         {
             SwingArm();
         }
+
+        // ------------------------- DEBUG ----------------------
+        _isFacingLeft = !debugMode;
     }
 
     private void FixedUpdate()
     {
-        if(_isSwingingForward)
+        if (_isSwingingForward)
         {
             HandleForwardSwing();
-        } else if (_isSwingingReturn)
+        }
+        else if (_isSwingingReturn)
         {
             HandleReturnSwing();
         }
-    }
-
-    private void HandleReturnSwing()
-    {
-        float timeSinceStarted = Time.time - _timeStartedLerping;
-        float percentageComplete = timeSinceStarted / 1f;
-
-        transform.rotation = Quaternion.Lerp(_startRotation, _endRotation, percentageComplete);
-        if (percentageComplete >= 1.0f)
+        else
         {
-            _isSwingingReturn = false;
+            transform.rotation = SwingStartRotation;
         }
     }
 
@@ -44,7 +47,7 @@ public class ArmMovementScript : MonoBehaviour
         float timeSinceStarted = Time.time - _timeStartedLerping;
         float percentageComplete = timeSinceStarted / 1f;
 
-        transform.rotation = Quaternion.Lerp(_startRotation, _endRotation, CalculateLerpVal(percentageComplete));
+        transform.rotation = Quaternion.Lerp(SwingStartRotation, SwingEndRotation, CalculateLerpVal(percentageComplete));
 
         if (percentageComplete >= 1.0f)
         {
@@ -53,18 +56,35 @@ public class ArmMovementScript : MonoBehaviour
             _timeStartedLerping = Time.time;
 
             _startRotation = transform.rotation;
-            _endRotation = Quaternion.AngleAxis(-205f, Vector3.forward);
+            _endRotation = Quaternion.AngleAxis(-205f, transform.forward);
         }
     }
 
+    private void HandleReturnSwing()
+    {
+        float timeSinceStarted = Time.time - _timeStartedLerping;
+        float percentageComplete = timeSinceStarted / 1f;
+
+        transform.rotation = Quaternion.Lerp(SwingEndRotation, SwingStartRotation, percentageComplete);
+        if (percentageComplete >= 1.0f)
+        {
+            _isSwingingReturn = false;
+        }
+    }
+
+    private float SwingStartAngle => _isFacingLeft ? facingLeftStartAngle : facingRightStartAngle;
+    private float SwingEndAngle => _isFacingLeft ? facingLeftEndAngle : facingRightEndAngle;
+
+    private Quaternion SwingStartRotation => Quaternion.AngleAxis(SwingStartAngle, Vector3.forward);
+    private Quaternion SwingEndRotation => Quaternion.AngleAxis(SwingEndAngle, Vector3.forward);
 
     private void SwingArm()
     {
         _isSwingingForward = true;
         _timeStartedLerping = Time.time;
- 
+
         _startRotation = transform.rotation;
-        _endRotation = Quaternion.AngleAxis(-90f, Vector3.forward);
+        _endRotation = Quaternion.AngleAxis(-90f, transform.forward);
     }
 
     private static float CalculateLerpVal(float x)
