@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class MainCameraScript : MonoBehaviour
 {
-    [SerializeField] private int firefliesPerRoom = 1;
-    [SerializeField] private bool debugMode;
-
     private GameObject _player;
     private Camera _camera;
     private AudioListener _listener;
@@ -17,10 +14,12 @@ public class MainCameraScript : MonoBehaviour
     private int _fireflyCount;
 
     private List<SpawnLocationScript> _spawnLocations;
+    private Movement _playerMovementScript;
 
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player");
+        _playerMovementScript = _player.GetComponent<Movement>();
         _camera = GetComponent<Camera>();
         _listener = GetComponent<AudioListener>();
         _convoOverlayScript = GameObject.FindWithTag("ConversationOverlay")?.GetComponent<ConversationOverlayScript>();
@@ -67,23 +66,24 @@ public class MainCameraScript : MonoBehaviour
 
     public void FadeIn()
     {
+        if (_spawnLocations.Count == 0)
+        {
+            FadeOut();
+            return;
+        }
+        SpawnLocationScript currentSpawnLocation = _spawnLocations[0];
+        _spawnLocations.RemoveAt(0);
+        _playerMovementScript.SpawnAtLocation(currentSpawnLocation.Location);
+        _playerMovementScript.IsMovementAllowed = true;
+        _fireflyCount = currentSpawnLocation.NumFireflies;
         _camera.enabled = true;
         _listener.enabled = true;
-        _fireflyCount = firefliesPerRoom;
         _scoreText.text = _fireflyCount.ToString();
-
-        // -------------------------- DEBUG --------------------------------
-        if (debugMode)
-        {
-            for (int i = 0; i < firefliesPerRoom; i++)
-            {
-                Invoke(nameof(MarkFireflyCaught), i);
-            }
-        }
     }
 
     public void FadeOut()
     {
+        _playerMovementScript.IsMovementAllowed = false;
         _camera.enabled = false;
         _listener.enabled = false;
         _convoOverlayScript.FadeIn();
