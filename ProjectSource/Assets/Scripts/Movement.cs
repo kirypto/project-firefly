@@ -14,6 +14,8 @@ public class Movement : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    private SpriteRenderer spriteRenderer;
+
     private bool _allowJump;
 
     // Start is called before the first frame update
@@ -21,6 +23,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         _allowJump = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -45,6 +48,10 @@ public class Movement : MonoBehaviour
             Invoke(nameof(ResetJumpCooldown), 1.5f);
             Vector2 moveJump = new Vector2(0.0f, _jMove);
             rb.AddForce((moveJump * jumpHeight), ForceMode2D.Impulse);
+        }
+        bool flipSprite = (spriteRenderer.flipX ? (_xMove > 0.01f) : (_xMove < 0.01f));
+        if (flipSprite) {
+            spriteRenderer.flipX = !spriteRenderer.flipX;
         }
     }
 

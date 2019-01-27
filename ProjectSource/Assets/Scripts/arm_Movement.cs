@@ -30,7 +30,7 @@ public class arm_Movement : MonoBehaviour
         {
             Debug.Log("ACTION!");
             allowSwing = false;
-            transform.RotateAround(transform.position, Vector3.forward, 8000);
+            transform.RotateAround(transform.position, Vector3.forward, 135);
              
             Invoke(nameof(resetSwingCooldown),coolTime);
         }
@@ -38,7 +38,7 @@ public class arm_Movement : MonoBehaviour
 
     private void resetSwingCooldown()
     {
-        transform.RotateAround(transform.position, Vector3.back, 8000);
+        transform.RotateAround(transform.position, Vector3.back, 135);
         
         allowSwing = true;
     }
